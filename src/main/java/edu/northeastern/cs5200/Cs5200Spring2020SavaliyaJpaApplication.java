@@ -11,5 +11,4 @@ public class Cs5200Spring2020SavaliyaJpaApplication extends SpringBootServletIni
 	public static void main(String[] args) {
 		SpringApplication.run(Cs5200Spring2020SavaliyaJpaApplication.class, args);
 	}
-
 }
