@@ -19,6 +19,7 @@ public class CreateController {
   userDao userDao;
 
   @RequestMapping("/new")
+  @CrossOrigin(value = "http://localhost:8000", allowCredentials = "true")
   public String showNewProductPage(Model model) {
     User user = new User();
     model.addAttribute("user", user);
@@ -27,7 +28,7 @@ public class CreateController {
 
   @PostMapping("/signUp/patient")
   @CrossOrigin(value = "http://localhost:8000", allowCredentials = "true")
-  public Boolean createPatient(@RequestBody User user) {
+  public Boolean createUser(@RequestBody User user) {
     return userDao.saveUser(user);
   }
 
