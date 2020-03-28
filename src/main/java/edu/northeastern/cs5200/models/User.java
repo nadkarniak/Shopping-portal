@@ -9,4 +9,6 @@ public class User {
   @Id
   private Integer id;
 
+  public User() {}
+
 }
