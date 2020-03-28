@@ -27,8 +27,8 @@ public class CreateController {
 
   @PostMapping("/signUp/patient")
   @CrossOrigin(value = "http://localhost:8000", allowCredentials = "true")
-  public Boolean createPatient(@RequestBody Patient patient) {
-    return hospitalManagementDao.createPatient(patient);
+  public Boolean createPatient(@RequestBody User user) {
+    return userDao.saveUser(user);
   }
 
 

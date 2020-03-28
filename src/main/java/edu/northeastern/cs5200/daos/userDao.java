@@ -10,8 +10,9 @@ public class userDao {
   @Autowired
   UserRepository userRepository;
 
-  public void saveUser(User user) {
+  public boolean saveUser(User user) {
     userRepository.save(user);
+    return true;
   }
 
 }
