@@ -1,9 +1,8 @@
 package edu.northeastern.cs5200.models;
 
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -12,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="feedback")
 public class Feedback {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -22,12 +22,10 @@ public class Feedback {
   private String review;
 
   public Feedback(){
-
   }
 
 
-  public Feedback(int id, @NotNull int rating, String review) {
-    this.id = id;
+  public Feedback(int rating, String review) {
     this.rating = rating;
     this.review = review;
   }

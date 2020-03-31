@@ -1,13 +1,13 @@
 package edu.northeastern.cs5200.models;
 
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "item_list")
 public class ItemList {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -22,16 +23,15 @@ public class ItemList {
   @NotNull
   private String name;
 
-  @NotNull
   @ManyToOne
-  @JoinColumn(name="id")
+  //@JoinColumn(name="id")
   private User supplier;
+
 
   public ItemList(){
 
   }
-  public ItemList(int id, String name, User supplier){
-    this.id = id;
+  public ItemList(String name, User supplier) {
     this.name = name;
     this.supplier = supplier;
   }

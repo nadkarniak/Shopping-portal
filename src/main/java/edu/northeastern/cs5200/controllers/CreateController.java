@@ -1,35 +1,30 @@
 package edu.northeastern.cs5200.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import edu.northeastern.cs5200.daos.userDao;
-import edu.northeastern.cs5200.models.User;
+import java.util.List;
+import edu.northeastern.cs5200.daos.productDao;
+import edu.northeastern.cs5200.models.Product;
 
 @RestController
-@CrossOrigin()
 public class CreateController {
 
+
   @Autowired
-  userDao userDao;
+  private productDao productDao;
 
-  @RequestMapping("/new")
-  @CrossOrigin(value = "http://localhost:8000", allowCredentials = "true")
-  public String showNewProductPage(Model model) {
-    User user = new User();
-    model.addAttribute("user", user);
-    return "index";
-  }
-
-  @PostMapping("/signUp/patient")
-  @CrossOrigin(value = "http://localhost:8000", allowCredentials = "true")
-  public Boolean createUser(@RequestBody User user) {
-    return userDao.saveUser(user);
+  @GetMapping("/")
+  public List<Product> viewHomePage(Model model) {
+    List<Product> listProducts = productDao.listAll();
+    return listProducts;
+    //model.addAttribute("listProducts", listProducts);
+    //return "product";
   }
 
 
