@@ -10,7 +10,7 @@ async function onSignup(form) {
 			  },
 		    body: JSON.stringify({firstName: form.fname.value, lastName: form.lname.value, email: form.email.value,
 		    	password: form.psw.value, userName: form.username.value})
-	  	})
+	  	}) 
 
 		} catch(error) {
 			alert("Signup failed, try another username");
@@ -20,9 +20,9 @@ async function onSignup(form) {
 		console.log(success)
 		if(success == true) {
 			alert("Signup successful");
-
+			
 			window.location.href = 'login.html';
-
+			
 		}
 
 	} else {
@@ -51,10 +51,10 @@ async function onLogin(form) {
 		data = await response.json();
 		console.log(data);
 		if(data == true) {
-			if (form.type.value == 'buyer') {
-				window.location.href = 'buyer.html';
-			} else if(form.type.value == 'supplier') {
-				window.location.href = 'supplier.html';
+			if (form.type.value == 'patient') {
+				window.location.href = 'patient.html';
+			} else if(form.type.value == 'doctor') {
+				window.location.href = 'doctor.html';
 			} else {
 				window.location.href = 'manager.html';
 			}
@@ -67,6 +67,6 @@ async function onLogin(form) {
 
 	} catch(error) {
 		alert("Wrong credentials");
-	}
+	} 
 
 }
