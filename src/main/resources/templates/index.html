@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="../webapp/js/login.js"></script></head>
+	<script type="text/javascript" src="../js/login.js"></script></head>
 <body onload="session()">
 <div style="margin: 50px;">
-	<button onclick="(function log(){
+	<!--<button onclick="(function log(){
     		location = 'login.html';
-    	})()">Login</button>
+    	})()">Login</button> -->
+
+    <button onclick="window.location.href = 'http://localhost:8080/login';"> Login </button>
 </div>
 
 <form action="javascript:;" onsubmit="onSignup(this)"  name ='signup' style="border:1px solid #ccc" method="post">
