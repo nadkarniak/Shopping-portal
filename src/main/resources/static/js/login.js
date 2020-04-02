@@ -1,7 +1,10 @@
-async function onSignup(form) {
+function onSignUp() {
+    var form  = document.getElementById("form");
+
 	if (form.pswrepeat.value == form.psw.value) {
+	    alert("hello");
 		try{
-			response = await fetch('http://localhost:8080/signUp/'
+			const response = await fetch('http://localhost:8080/sign/'
 			 + form.type.value, {
 		    method: 'POST',
 			headers: {
@@ -15,15 +18,17 @@ async function onSignup(form) {
 		} catch(error) {
 			alert("Signup failed, try another username");
 		}
-
+        alert("signup successful");
+        window.location.href = 'http://localhost:8080/login';
 		success = await response.json();
 		console.log(success)
 		if(success == true) {
 			alert("Signup successful");
 			
-			window.location.href = 'login.html';
+			window.location.href = 'http://localhost:8080/login';
 			
 		}
+
 
 	} else {
 		alert("Passwords do not match !")
@@ -51,10 +56,10 @@ async function onLogin(form) {
 		data = await response.json();
 		console.log(data);
 		if(data == true) {
-			if (form.type.value == 'patient') {
-				window.location.href = 'patient.html';
-			} else if(form.type.value == 'doctor') {
-				window.location.href = 'doctor.html';
+			if (form.type.value == 'buyer') {
+				window.location.href = 'buyer.html';
+			} else if(form.type.value == 'supplier') {
+				window.location.href = 'supplier.html';
 			} else {
 				window.location.href = 'manager.html';
 			}

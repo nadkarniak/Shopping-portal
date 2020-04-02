@@ -10,21 +10,28 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "user")
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+
   @NotNull
   private String firstName;
+
   @NotNull
   private String lastName;
-  @Column(unique = true)
+
   @NotNull
   private String userName;
+
   @NotNull
   private String email;
+
   @NotNull
   private String password;
+
+
 
   // default constructor.
   public User() {
@@ -38,6 +45,7 @@ public class User {
   public void setId(int id) {
     this.id = id;
   }
+
 
   public String getFirstName() {
     return firstName;
