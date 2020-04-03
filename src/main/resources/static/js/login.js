@@ -1,4 +1,4 @@
-function onSignUp() {
+async function onSignUp() {
     var form  = document.getElementById("form");
 
 	if (form.pswrepeat.value == form.psw.value) {
@@ -41,6 +41,9 @@ function session() {
 }
 
 async function onLogin(form) {
+
+    alert(form.username.value);
+
 	response = await fetch('http://localhost:8080/login?username=' +
 	form.username.value + '&password=' + form.psw.value + '&type=' + form.type.value, {
     method: 'GET',
@@ -53,11 +56,12 @@ async function onLogin(form) {
   	});
 
 	try{
+	    alert("hello");
 		data = await response.json();
 		console.log(data);
 		if(data == true) {
 			if (form.type.value == 'buyer') {
-				window.location.href = 'buyer.html';
+				window.location.href = 'http://localhost:8080/buyer';
 			} else if(form.type.value == 'supplier') {
 				window.location.href = 'supplier.html';
 			} else {

@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-
 
   @NotNull
   private String firstName;
@@ -30,7 +30,6 @@ public class User {
 
   @NotNull
   private String password;
-
 
 
   // default constructor.

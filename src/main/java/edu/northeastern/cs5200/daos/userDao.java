@@ -3,7 +3,10 @@ package edu.northeastern.cs5200.daos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.transaction.Transactional;
 
@@ -45,13 +48,21 @@ public class userDao {
     return true;
   }
 
-  public List<User> findAllBuyers() {
-    return (List<User>) userRepository.findAll();
-  }
 
-  public boolean saveProduct(Product product) {
-    productRepository.save(product);
-    return true;
+  public Map<String, String> findAllBuyers() {
+    try {
+      List<Buyer> buyers = (List<Buyer>) buyerRepository.findAll();
+      Map<String, String> buyerMap = new HashMap<>();
+      for (Buyer buyer : buyers) {
+        buyerMap.put(buyer.getUserName(), buyer.getPassword());
+      }
+
+      return buyerMap;
+
+    } catch (NoSuchElementException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
 }

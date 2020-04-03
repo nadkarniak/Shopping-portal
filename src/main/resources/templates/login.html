@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript" src="js/login.js"></script></head>
 <body>
-	<form action="javascript:;" onsubmit="onLogin(this)" name='login' style="border:1px solid #ccc" method="post">
+	<form th:action="@{/login}" th:object="${login}"  name='login' style="border:1px solid #ccc" method="post">
   <div class="container">
     <h1>Login</h1>
     <p>Please fill in this form to login.</p>
     <hr>
 
-    <label for="email"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" th:field="*{userName}" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" th:field="*{password}" name="psw" required>
 
-    <label for="type"><b>Select User type</b></label>
-    <select name="type">
-      <option value="buyer">Buyer</option>
-      <option value="supplier">Supplier</option>
-      <option value="appManager">Manager</option>
+    <label><b>Select User type</b></label>
+    <select name="type" th:field="*{userType}">
+      <option value="buyer">buyer</option>
+      <option value="supplier">supplier</option>
+      <option value="appManager">manager</option>
     </select>
 
     <div style="margin:20px;" class="clearfix">
