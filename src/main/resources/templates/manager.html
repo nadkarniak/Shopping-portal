@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script>
+        function updateBuyer() {
+            alert("update the buyers");
+            window.location.href = 'http://localhost:8080/updateBuyer';
+        }
+    </script>
+
+<title></title>
+</head>
+<body>
+
+<div style="margin: 30px;">
+    <button onclick="updateBuyer()" >View, Delete and Update Buyers</button>
+    <button onclick="updateDoc()">View, Delete and Update Suppliers</button>
+    <button onclick="updateLoc()">View, Delete and Update Locations</button>
+
+</div>
+<h2>Create Location</h2>
+<div style="margin: 50px;">
+    <input type="text" id="loc" placeholder="New location name">
+    <input type="text" id="add" placeholder="New Address for location">
+
+    <button onclick="addLocation()">Add new location</button>
+</div>
+<br/>
+<br/>
+<br/>
+<h2>Create Coupon</h2>
+<div style="margin: 50px;">
+    <input type="text" id="desc" placeholder="Reward Description">
+    <input type="text" id="count" placeholder="Number of such rewards">
+    <input type="text" id="rloc" placeholder="location to offer this reward">
+    <br/>
+    <br/>
+    <br/>
+    <span> Enter product if you want to create Free coupon</span>
+    <input type="text" id="med" placeholder="Medicine">
+    <br/>
+    <br/>
+    <span> Enter Amount if you want to create Discount coupon</span>
+    <input type="text" id="amt" placeholder="Amount">
+    <label><b>Select Reward type</b></label>
+    <select id="rtype">
+        <option value="free">Free</option>
+        <option value="discount">Discount</option>
+    </select>
+    <button onclick="addReward()">Add new coupon</button>
+</div>
+<div id="allFeedback" style="margin: 50px;">
+    <h2>All Feedbacks Given By Buyer</h2>
+</div>
+</body>
+</html>

@@ -17,16 +17,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import edu.northeastern.cs5200.daos.productDao;
 import edu.northeastern.cs5200.daos.userDao;
+import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
+import edu.northeastern.cs5200.models.DeleteUser;
 import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
 import edu.northeastern.cs5200.models.User;
 import edu.northeastern.cs5200.models.UserLogin;
 import edu.northeastern.cs5200.models.UserRegistration;
+import edu.northeastern.cs5200.repositories.AppManagerRepository;
 import edu.northeastern.cs5200.repositories.BuyerRepository;
 import edu.northeastern.cs5200.repositories.SupplierRepository;
 
@@ -45,6 +49,9 @@ public class CreateController {
 
   @Autowired
   private SupplierRepository supplierRepository;
+
+  @Autowired
+  private AppManagerRepository appManagerRepository;
 
   @RequestMapping("/registration")
   public String index(Model model) {
@@ -114,12 +121,33 @@ public class CreateController {
         }
       }
     }
-    else {
-
+    else if(userLogin.getUserType().equals("appManager")) {
+      for(AppManager appManager: appManagerRepository.findAll()) {
+        if(appManager.getUsername().equals(userLogin.getUserName()) &&
+                appManager.getPassword().equals(userLogin.getPassword())) {
+          return "manager";
+        }
+      }
     }
 
     return "redirect:/login";
   }
+
+  @RequestMapping("/updateBuyer")
+  public String updateBuyer(Model model) {
+    DeleteUser deleteUser = new DeleteUser();
+    model.addAttribute("updateBuyer", deleteUser);
+    return "updatebuyer";
+  }
+
+  @Transactional
+  @RequestMapping(value = "/updateBuyer", method = RequestMethod.POST)
+  public String updateBuyerFinally(@ModelAttribute("updateBuyer") @Valid DeleteUser deleteUser) {
+    //buyerRepository.deleteBuyerByUserName(deleteUser.getUserName());
+    buyerRepository.deleteBuyers(deleteUser.getUserName());
+    return "updatebuyer";
+  }
+
 
 
 

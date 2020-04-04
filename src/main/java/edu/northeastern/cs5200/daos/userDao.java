@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 
 import javax.transaction.Transactional;
 
+import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
 import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
@@ -31,6 +32,9 @@ public class userDao {
   SupplierRepository supplierRepository;
 
   @Autowired
+  AppManagerRepository appManagerRepository;
+
+  @Autowired
   ProductRepository productRepository;
 
   public boolean saveUser(User user) {
@@ -45,6 +49,11 @@ public class userDao {
 
   public boolean saveSupplier(Supplier supplier) {
     supplierRepository.save(supplier);
+    return true;
+  }
+
+  public boolean saveAppManager(AppManager appManager) {
+    appManagerRepository.save(appManager);
     return true;
   }
 
