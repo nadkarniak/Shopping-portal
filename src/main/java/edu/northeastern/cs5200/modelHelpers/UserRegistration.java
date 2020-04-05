@@ -1,4 +1,4 @@
-package edu.northeastern.cs5200.models;
+package edu.northeastern.cs5200.modelHelpers;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

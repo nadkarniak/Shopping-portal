@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
-import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
 import edu.northeastern.cs5200.models.User;
 import edu.northeastern.cs5200.repositories.*;

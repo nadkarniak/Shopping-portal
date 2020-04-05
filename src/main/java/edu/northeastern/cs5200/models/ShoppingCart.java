@@ -23,6 +23,9 @@ public class ShoppingCart {
   @NotNull
   private Date created;
 
+  @ManyToOne
+  private Buyer buyerCart;
+
   @OneToMany(mappedBy = "shoppingCart")
   private List<Product> listOfProducts;
 

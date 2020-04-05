@@ -3,20 +3,11 @@ package edu.northeastern.cs5200.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -25,11 +16,9 @@ import edu.northeastern.cs5200.daos.userDao;
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
 import edu.northeastern.cs5200.models.DeleteUser;
-import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
-import edu.northeastern.cs5200.models.User;
-import edu.northeastern.cs5200.models.UserLogin;
-import edu.northeastern.cs5200.models.UserRegistration;
+import edu.northeastern.cs5200.modelHelpers.UserLogin;
+import edu.northeastern.cs5200.modelHelpers.UserRegistration;
 import edu.northeastern.cs5200.repositories.AppManagerRepository;
 import edu.northeastern.cs5200.repositories.BuyerRepository;
 import edu.northeastern.cs5200.repositories.SupplierRepository;
