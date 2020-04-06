@@ -56,6 +56,14 @@ public class userDao {
     return true;
   }
 
+  public List<Buyer> findAllBuy() {
+    return (List<Buyer>) buyerRepository.findAll();
+  }
+
+  public List<Supplier> findAllSup() {
+    return (List<Supplier>) supplierRepository.findAll();
+  }
+
 
   public Map<String, String> findAllBuyers() {
     try {

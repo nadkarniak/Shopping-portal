@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1> Hii, Delete Supplier </h1>
+
+<h2>List all Suppliers</h2>
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="supplier : ${listSuppliers}">
+        <td th:text="${supplier.id}">Product ID</td>
+        <td th:text="${supplier.firstName}">First Name</td>
+        <td th:text="${supplier.lastName}">Last Name</td>
+        <td th:text="${supplier.userName}">User Name</td>
+        <td th:text="${supplier.email}">Email</td>
+        <td>
+            <a th:href="@{'/supplier/delete/' + ${supplier.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

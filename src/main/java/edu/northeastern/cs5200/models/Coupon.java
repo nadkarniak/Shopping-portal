@@ -19,14 +19,30 @@ public class Coupon {
 
   private DiscountType dType;
 
-  //coupon for the particular product
-  private String productCoupon;
+  public int getCouponCode() {
+    return couponCode;
+  }
+
+  public void setCouponCode(int couponCode) {
+    this.couponCode = couponCode;
+  }
+
+  public Buyer getBuyerCoupon() {
+    return buyerCoupon;
+  }
+
+  public void setBuyerCoupon(Buyer buyerCoupon) {
+    this.buyerCoupon = buyerCoupon;
+  }
+
+  private int couponCode;
 
   @ManyToOne
   private Buyer buyerCoupon;
 
   public Coupon(){
   }
+
 
   public int getId() {
     return id;
@@ -42,15 +58,6 @@ public class Coupon {
 
   public void setdType(DiscountType dType) {
     this.dType = dType;
-  }
-
-  public String getProductCoupon() {
-    return productCoupon;
-  }
-
-  public void setProductCoupon(String productCoupon) {
-
-    this.productCoupon = productCoupon;
   }
 
 

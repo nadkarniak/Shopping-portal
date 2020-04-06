@@ -2,25 +2,37 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>hii, I am buyer</title>
+    <title></title>
 </head>
 <body>
 
 <h1> Hii, Delete Buyer </h1>
 
-<form th:object="${updateBuyer}" th:action="@{updateBuyer}">
-
-<label><b>Username</b></label>
-<input type="text" placeholder="Enter Username" th:field="*{userName}" name="username" required>
-
-<label><b>Password</b></label>
-<input type="password" placeholder="Enter Password" th:field="*{password}" name="psw" required>
-
-    <div style="margin:20px;" class="clearfix">
-        <button type="submit">Update</button>
-    </div>
-
-</form>
+<h2>List all Buyers</h2>
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="buyer : ${listBuyers}">
+        <td th:text="${buyer.id}">Product ID</td>
+        <td th:text="${buyer.firstName}">First Name</td>
+        <td th:text="${buyer.lastName}">Last Name</td>
+        <td th:text="${buyer.userName}">User Name</td>
+        <td th:text="${buyer.email}">Email</td>
+        <td>
+            <a th:href="@{'/buyer/delete/' + ${buyer.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

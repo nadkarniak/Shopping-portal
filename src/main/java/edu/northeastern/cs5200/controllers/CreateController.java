@@ -18,6 +18,7 @@ import edu.northeastern.cs5200.daos.productDao;
 import edu.northeastern.cs5200.daos.userDao;
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
+import edu.northeastern.cs5200.models.Coupon;
 import edu.northeastern.cs5200.models.DeleteUser;
 import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
@@ -96,6 +97,18 @@ public class CreateController {
     return "login";
   }
 
+  @RequestMapping("/login/manager")
+  public String loginManager() {
+    //model.addAttribute("coupon", new Coupon());
+    return "manager";
+  }
+
+  @RequestMapping(value = "/login/manager", method = RequestMethod.POST)
+  public String addCoupon(@ModelAttribute("coupon") @Valid Coupon coupon) {
+    productDao.saveCoupon(coupon);
+    return "redirect:/login/manager";
+  }
+
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public String authenticateLogin(@ModelAttribute("login") @Valid UserLogin userLogin) {
 
@@ -119,7 +132,7 @@ public class CreateController {
       for(AppManager appManager: appManagerRepository.findAll()) {
         if(appManager.getUsername().equals(userLogin.getUserName()) &&
                 appManager.getPassword().equals(userLogin.getPassword())) {
-          return "manager";
+          return "redirect:/login/manager";
         }
       }
     }
@@ -171,8 +184,17 @@ public class CreateController {
   @RequestMapping("/updateBuyer")
   public String updateBuyer(Model model) {
     DeleteUser deleteUser = new DeleteUser();
+    List<Buyer> buyerList = userDao.findAllBuy();
+    model.addAttribute("listBuyers", buyerList);
     model.addAttribute("updateBuyer", deleteUser);
     return "updatebuyer";
+  }
+
+  @RequestMapping("/updateSupplier")
+  public String updateSupplier(Model model) {
+    List<Supplier> supplierList = userDao.findAllSup();
+    model.addAttribute("listSuppliers", supplierList);
+    return "updateSupplier";
   }
 
   @Transactional

@@ -8,25 +8,25 @@ import javax.persistence.OneToMany;
 @Entity
 public class Buyer extends User {
 
-  private int credit;
+  /*private int credit;
 
   @OneToMany(mappedBy = "buyerCart")
   private List<ShoppingCart> shoppingCartList;
 
   @OneToMany(mappedBy = "buyerCoupon")
-  private List<Coupon> couponList;
+  private List<Coupon> couponList;*/
 
   public Buyer() {
     super();
   }
 
 
-  public int getCredit() {
+  /*public int getCredit() {
     return credit;
   }
 
   public void setCredit(int credit) {
     this.credit = credit;
-  }
+  }*/
 
 }
