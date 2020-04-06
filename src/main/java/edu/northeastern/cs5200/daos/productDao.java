@@ -21,6 +21,11 @@ public class productDao {
     return true;
   }
 
+  public void deleteProductById(long id) {
+    //productRepository.deleteProductById(id);
+    productRepository.deleteById(id);
+  }
+
   public List<Product> listAll() {
     return (List<Product>) productRepository.findAll();
   }

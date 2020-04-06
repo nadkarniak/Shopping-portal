@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,10 @@ public class Coupon {
   private DiscountType dType;
 
   //coupon for the particular product
-  private Product productCoupon;
+  private String productCoupon;
+
+  @ManyToOne
+  private Buyer buyerCoupon;
 
   public Coupon(){
   }
@@ -40,11 +44,12 @@ public class Coupon {
     this.dType = dType;
   }
 
-  public Product getProductCoupon() {
+  public String getProductCoupon() {
     return productCoupon;
   }
 
-  public void setProductCoupon(Product productCoupon) {
+  public void setProductCoupon(String productCoupon) {
+
     this.productCoupon = productCoupon;
   }
 

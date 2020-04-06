@@ -13,6 +13,9 @@ public class Buyer extends User {
   @OneToMany(mappedBy = "buyerCart")
   private List<ShoppingCart> shoppingCartList;
 
+  @OneToMany(mappedBy = "buyerCoupon")
+  private List<Coupon> couponList;
+
   public Buyer() {
     super();
   }

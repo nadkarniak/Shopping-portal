@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -16,6 +19,7 @@ import edu.northeastern.cs5200.daos.userDao;
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
 import edu.northeastern.cs5200.models.DeleteUser;
+import edu.northeastern.cs5200.models.Product;
 import edu.northeastern.cs5200.models.Supplier;
 import edu.northeastern.cs5200.modelHelpers.UserLogin;
 import edu.northeastern.cs5200.modelHelpers.UserRegistration;
@@ -41,6 +45,7 @@ public class CreateController {
 
   @Autowired
   private AppManagerRepository appManagerRepository;
+
 
   @RequestMapping("/registration")
   public String index(Model model) {
@@ -106,7 +111,7 @@ public class CreateController {
       for(Supplier supplier: supplierRepository.findAll()) {
         if(supplier.getUserName().equals(userLogin.getUserName()) &&
                 supplier.getPassword().equals(userLogin.getPassword())) {
-          return "supplier";
+          return "redirect:/supplier";
         }
       }
     }
@@ -121,6 +126,47 @@ public class CreateController {
 
     return "redirect:/login";
   }
+
+  @RequestMapping("/supplier")
+  public String viewHomePage(Model model) {
+    List<Product> listProducts = productDao.listAll();
+    model.addAttribute("listProducts", listProducts);
+    return "product";
+  }
+
+  @RequestMapping("new/product")
+  public String addNewProduct(Model model) {
+    model.addAttribute("product", new Product());
+    return "newProduct";
+  }
+
+  @RequestMapping(value = "new/product", method = RequestMethod.POST)
+  public String addNewProductInTable(@ModelAttribute("product") @Valid Product product) {
+    productDao.saveProduct(product);
+    return "newProduct";
+  }
+
+  @RequestMapping("product/delete/{id}")
+  public String deleteProduct(@PathVariable(name = "id") int id) {
+    productDao.deleteProductById(id);
+    return "redirect:/supplier";
+  }
+
+  //@RequestMapping("/view/product")
+
+  @RequestMapping("product/edit/{id}")
+  public String editProduct(@PathVariable(name = "id") int id) {
+    productDao.deleteProductById(id);
+    return "redirect:/new/product";
+  }
+
+  @RequestMapping("back/supplier")
+  public String backToSupplier() {
+      return "redirect:/supplier";
+  }
+
+
+
 
   @RequestMapping("/updateBuyer")
   public String updateBuyer(Model model) {

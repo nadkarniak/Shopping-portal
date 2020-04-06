@@ -17,18 +17,23 @@ import javax.validation.constraints.NotNull;
 public class Product {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @NotNull
   private String name;
 
   @NotNull
+  private String brand;
+
+  @NotNull
+  private String madein;
+
+  @NotNull
   private String description;
 
-  private Date manufactured;
 
-  private Date expires;
+  @NotNull
+  private Date manufactured;
 
   @NotNull
   private double price;
@@ -40,12 +45,36 @@ public class Product {
 
   }
 
-  public Product(String name, String description, Date manufactured, Date expires, double price) {
-    this.name = name;
-    this.description = description;
-    this.manufactured = manufactured;
-    this.expires = expires;
-    this.price = price;
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getBrand() {
+    return brand;
+  }
+
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  public String getMadein() {
+    return madein;
+  }
+
+  public void setMadein(String madein) {
+    this.madein = madein;
+  }
+
+  public ShoppingCart getShoppingCart() {
+    return shoppingCart;
+  }
+
+  public void setShoppingCart(ShoppingCart shoppingCart) {
+    this.shoppingCart = shoppingCart;
   }
 
 
@@ -71,14 +100,6 @@ public class Product {
 
   public void setManufactured(Date manufactured) {
     this.manufactured = manufactured;
-  }
-
-  public Date getExpires() {
-    return expires;
-  }
-
-  public void setExpires(Date expires) {
-    this.expires = expires;
   }
 
   public double getPrice() {
