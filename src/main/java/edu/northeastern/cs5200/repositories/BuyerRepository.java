@@ -13,6 +13,9 @@ public interface BuyerRepository extends CrudRepository<Buyer, Long> {
   @Query("delete from User b where b.userName=:userName")
   void deleteBuyers(@Param("userName") String title);
 
+
+  @Query("SELECT buyer FROM Buyer buyer WHERE buyer.userName = :username ")
+  public Buyer findBuyerByUsername(@Param("username") String userName);
 }
 
 
