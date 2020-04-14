@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -28,5 +29,13 @@ public class productDao {
 
   public List<Product> listAll() {
     return (List<Product>) productRepository.findAll();
+  }
+
+  public Product findProductByName(String name){
+    return productRepository.findProductByName(name);
+  }
+
+  public Optional<Product> findById(int Id){
+    return productRepository.findById((long)Id);
   }
 }
