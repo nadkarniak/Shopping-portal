@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -79,6 +80,22 @@ public class userDao {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public Buyer findBuyerByUsername(String username){
+    return buyerRepository.findBuyerByUsername(username);
+  }
+
+  public Supplier findSupplierByUsername(String username){
+    return supplierRepository.findSupplierByUsername(username);
+  }
+
+  public Optional<Buyer> findBuyerById(int Id){
+    return buyerRepository.findById((long)Id);
+  }
+
+  public Optional<Supplier> findSupplierById(int Id){
+    return supplierRepository.findById((long)Id);
   }
 
 }
