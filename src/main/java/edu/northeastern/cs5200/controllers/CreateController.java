@@ -48,6 +48,27 @@ public class CreateController {
   private AppManagerRepository appManagerRepository;
 
 
+  @RequestMapping("/login/buyer")
+  public String buyerPage(Model model) {
+     List<Product> listProducts = productDao.listAll();
+     model.addAttribute("listProducts", listProducts);
+     return "buyer";
+  }
+
+
+  @RequestMapping("/login/manager/coupon")
+  public String couponCreation(Model model) {
+    Coupon coupon = new Coupon();
+    model.addAttribute("coupon", coupon);
+    return  "newCoupon";
+  }
+
+  @RequestMapping(value = "/login/manager/coupon", method = RequestMethod.POST)
+  public String couponSave(@ModelAttribute("coupon") @Valid Coupon coupon) {
+    productDao.saveCoupon(coupon);
+    return  "redirect:/login/manager";
+  }
+
   @RequestMapping("/registration")
   public String index(Model model) {
     UserRegistration user = new UserRegistration();
@@ -98,8 +119,8 @@ public class CreateController {
   }
 
   @RequestMapping("/login/manager")
-  public String loginManager() {
-    //model.addAttribute("coupon", new Coupon());
+  public String loginManager(Model model) {
+    model.addAttribute("coupon", new Coupon());
     return "manager";
   }
 
@@ -116,7 +137,7 @@ public class CreateController {
       for(Buyer buyer: buyerRepository.findAll()) {
         if(buyer.getUserName().equals(userLogin.getUserName()) &&
                 buyer.getPassword().equals(userLogin.getPassword())) {
-          return "buyer";
+          return "redirect:/login/buyer";
         }
       }
     }
@@ -159,13 +180,7 @@ public class CreateController {
     return "newProduct";
   }
 
-  @RequestMapping("product/delete/{id}")
-  public String deleteProduct(@PathVariable(name = "id") int id) {
-    productDao.deleteProductById(id);
-    return "redirect:/supplier";
-  }
 
-  //@RequestMapping("/view/product")
 
   @RequestMapping("product/edit/{id}")
   public String editProduct(@PathVariable(name = "id") int id) {
@@ -186,7 +201,6 @@ public class CreateController {
     DeleteUser deleteUser = new DeleteUser();
     List<Buyer> buyerList = userDao.findAllBuy();
     model.addAttribute("listBuyers", buyerList);
-    model.addAttribute("updateBuyer", deleteUser);
     return "updatebuyer";
   }
 
@@ -196,16 +210,6 @@ public class CreateController {
     model.addAttribute("listSuppliers", supplierList);
     return "updateSupplier";
   }
-
-  @Transactional
-  @RequestMapping(value = "/updateBuyer", method = RequestMethod.POST)
-  public String updateBuyerFinally(@ModelAttribute("updateBuyer") @Valid DeleteUser deleteUser) {
-    //buyerRepository.deleteBuyerByUserName(deleteUser.getUserName());
-    buyerRepository.deleteBuyers(deleteUser.getUserName());
-    return "updatebuyer";
-  }
-
-
 
 
 }

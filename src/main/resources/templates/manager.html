@@ -2,9 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <script>
-        function hello() {
-            alert("hello);
-        }
+
         function updateBuyer() {
             alert("update the buyers");
             window.location.href = 'http://localhost:8080/updateBuyer';
@@ -13,9 +11,11 @@
             alert("update the suppliers");
             window.location.href = 'http://localhost:8080/updateSupplier';
         }
-        function addCoupon() {
-            alert("Adding new coupon);
+
+        function hello() {
+            alert("hello");
         }
+
     </script>
 
 <title></title>
@@ -23,8 +23,8 @@
 <body>
 
 <div style="margin: 30px;">
-    <button onclick="hello()" >hello</button>
-    <button onclick="updateBuyer()" >View, Delete and Update Buyers</button>
+    <button  type="button" onclick="hello()" >hello</button>
+    <button type="button" onclick="updateBuyer()" >View, Delete and Update Buyers</button>
     <button onclick="updateSupplier()">View, Delete and Update Suppliers</button>
     <button onclick="updateLoc()">View, Delete and Update Locations</button>
 
@@ -40,20 +40,8 @@
 <br/>
 <br/>
 <h2>Create Coupon</h2>
-<!--<form action="#" th:action="@{/login/manager}" th:object="${coupon}">
-<div style="margin: 50px;">
-    <input type="text" id="desc" placeholder="Coupon Description" th:field="*{description}">
-    <input type="text" id="count" placeholder="Code for the Coupon" th:field="*{couponCode}">
-    <br/>
-    <br/>
-    <label><b>Select Coupon type</b></label>
-    <select id="rtype" th:field="*{dType}">
-        <option value="TWENTY">20% Discount</option>
-        <option value="FIFTY">50% Discount</option>
-    </select>
-    <button type="submit" onclick="addCoupon()">Add new coupon</button>
-</div>
-</form>-->
+<a href="/login/manager/coupon"> Create New Coupon </a>
+
 <div id="allFeedback" style="margin: 50px;">
     <h2>All Feedbacks Given By Buyer</h2>
 </div>

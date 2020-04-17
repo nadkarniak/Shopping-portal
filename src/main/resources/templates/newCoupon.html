@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Coupon</title>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Coupon</h1>
+    <br />
+    <form action="#" th:action="@{/login/manager/coupon}" th:object="${coupon}"
+          method="post">
+
+        <table border="0" cellpadding="10">
+
+            <tr>
+                <td>Coupon Description:</td>
+                <td><input type="text" th:field="*{description}" /></td>
+            </tr>
+            <tr>
+                <td>Product name:</td>
+                <td><input type="text" th:field="*{productName}" /></td>
+            </tr>
+            <tr>
+                <td>Coupon Code:</td>
+                <td><input type="text" th:field="*{couponCode}" /></td>
+            </tr>
+            <tr>
+                <select id="rtype" th:field="*{dType}">
+                    <option value="TWENTY">20% Discount</option>
+                    <option value="FIFTY">50% Discount</option>
+                </select>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>

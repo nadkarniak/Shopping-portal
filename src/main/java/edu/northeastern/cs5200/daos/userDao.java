@@ -98,4 +98,12 @@ public class userDao {
     return supplierRepository.findById((long)Id);
   }
 
+  public void deleteBuyer(int id) {
+    userRepository.deleteById(id);
+  }
+
+  public  void deleteSupplier(int id) {
+    userRepository.deleteById(id);
+  }
+
 }

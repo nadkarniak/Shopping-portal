@@ -32,10 +32,10 @@ public class Cs5200Spring2020SavaliyaJpaApplicationTests {
   @Test
   public void test1() {
 
-    /*String d1 = "2020-10-10";
+    String d1 = "2020-10-10";
     Date date = Date.valueOf(d1);
 
-    Product product1 = new Product("Mobile", "apple generation iphone 10", date, date, 800);
+    /*Product product1 = new Product("Mobile", "apple generation iphone 10", date, date, 800);
     Product product2 = new Product("Garlic", "garlic paste for cooking purpose", date, date, 5);
     Product product3 = new Product("Chips", "chips lays", date, date, 2);
     Product product4 = new Product("Trimmer", "Trimmer for shaving", date, date, 50);

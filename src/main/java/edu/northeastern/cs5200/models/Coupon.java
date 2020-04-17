@@ -17,7 +17,25 @@ public class Coupon {
 
   private String description;
 
+  private String productName;
+
   private DiscountType dType;
+
+  private int couponCode;
+
+  @ManyToOne
+  private Buyer buyerCoupon;
+
+  public Coupon(){
+  }
+
+  public String getProductName() {
+    return productName;
+  }
+
+  public void setProductName(String productName) {
+    this.productName = productName;
+  }
 
   public int getCouponCode() {
     return couponCode;
@@ -35,13 +53,7 @@ public class Coupon {
     this.buyerCoupon = buyerCoupon;
   }
 
-  private int couponCode;
 
-  @ManyToOne
-  private Buyer buyerCoupon;
-
-  public Coupon(){
-  }
 
 
   public int getId() {
