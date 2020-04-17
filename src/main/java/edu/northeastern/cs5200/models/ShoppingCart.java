@@ -23,22 +23,23 @@ public class ShoppingCart {
   @NotNull
   private Date created;
 
-  @ManyToOne
+  //buyer of the shopping cart
   private Buyer buyerCart;
 
   @OneToMany(mappedBy = "shoppingCart")
   private List<Product> listOfProducts;
 
   public ShoppingCart(){
-
   }
 
-
-  public ShoppingCart(Date created, @NotNull List<Product> listOfProducts) {
-    //this.id = id;
-    this.created = created;
-    this.listOfProducts = listOfProducts;
+  // set the buyer for this shopping cart and add the products to the shopping cart
+  public void AddProductToShoppingCart(Product product) {
+    listOfProducts.add(product);
+    if(buyerCart.getShoppingCartOfBuyer() != this) {
+      buyerCart.setShoppingCartOfBuyer(this);
+    }
   }
+
 
   public int getId() {
     return id;
