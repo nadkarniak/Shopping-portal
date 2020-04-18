@@ -62,7 +62,6 @@ form.example::after {
 
 <div align="center">
     <h1>Product List</h1>
-    <a href="/new/product">Create New Product</a>
     <br/><br/>
     <h2>List all products</h2>
     <table border="1" cellpadding="10">
@@ -88,12 +87,47 @@ form.example::after {
             <td th:text="${product.price}">Price</td>
             <td th:text="${product.manufactured}">Manufactured</td>
             <td>
-                <a th:href="@{'/login/buyer/shoppingCart' + ${product.id}}">Add to Shopping Cart</a>
+                <a th:href="@{'/login/buyer/shoppingCart/' + ${product.id}}">Add to Shopping Cart</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<h2> Shopping Cart</h2>
+<div>
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Made In</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Manufactured</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${shoppingCartList}">
+        <td th:text="${product.id}">Product ID</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.brand}">Brand</td>
+        <td th:text="${product.madein}">Made in</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.price}">Price</td>
+        <td th:text="${product.manufactured}">Manufactured</td>
+        <td>
+            <a th:href="@{'/login/buyer/shoppingCart/delete' + ${product.id}}">Delete from shopping cart</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+
 
 </body>
 </html>

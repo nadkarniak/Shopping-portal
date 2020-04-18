@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import edu.northeastern.cs5200.models.Coupon;
 import edu.northeastern.cs5200.models.Product;
+import edu.northeastern.cs5200.models.ShoppingCart;
 import edu.northeastern.cs5200.repositories.CouponRepository;
 import edu.northeastern.cs5200.repositories.ProductRepository;
 
@@ -41,11 +42,22 @@ public class productDao {
     return (List<Product>) productRepository.findAll();
   }
 
-  public Product findProductByName(String name){
+  /*public Product findProductByName(String name){
     return productRepository.findProductByName(name);
+  }*/
+
+  public Product findById(long id){
+    return productRepository.findProductById(id);
   }
 
-  public Optional<Product> findById(int Id){
-    return productRepository.findById((long)Id);
+  public void addProductToShoppingCart(ShoppingCart shoppingCart, int id) {
+
+    //get the product for the id
+    List<Product> products = listAll();
+    for(Product product: products) {
+      if (product.getId() == id) {
+        shoppingCart.AddProductToShoppingCart(product);
+      }
+    }
   }
 }

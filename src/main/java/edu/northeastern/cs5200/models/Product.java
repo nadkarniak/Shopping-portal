@@ -1,6 +1,8 @@
 package edu.northeastern.cs5200.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -39,10 +41,17 @@ public class Product {
   private double price;
 
   @ManyToOne
+  @JsonIgnore
   private ShoppingCart shoppingCart;
 
   public Product(){
+  }
 
+  public void setCartForProduct(ShoppingCart shoppingCart) {
+    this.shoppingCart = shoppingCart;
+    if (!shoppingCart.getListOfProducts().contains(this)) {
+      shoppingCart.getListOfProducts().add(this);
+    }
   }
 
   public long getId() {

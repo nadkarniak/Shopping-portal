@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Buyer extends User {
 
   // shopping cart of the buyer
+  @OneToOne(mappedBy = "buyerCart")
   private ShoppingCart shoppingCartOfBuyer;
 
   @OneToMany(mappedBy = "buyerCoupon")
@@ -18,8 +20,16 @@ public class Buyer extends User {
     super();
   }
 
+  //add the coupon and set the buyer for the coupon
+  public void addCouponToBuyer(Coupon coupon) {
+    couponList.add(coupon);
+    if(coupon.getBuyerCoupon() != this) {
+      coupon.setBuyerCoupon(this);
+    }
+  }
 
-  public ShoppingCart getShoppingCartOfBuyer() {
+
+   ShoppingCart getShoppingCartOfBuyer() {
     return shoppingCartOfBuyer;
   }
 
