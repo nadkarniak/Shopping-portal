@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import edu.northeastern.cs5200.modelHelpers.UserLogin;
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
 import edu.northeastern.cs5200.models.Supplier;
@@ -33,6 +34,9 @@ public class userDao {
 
   @Autowired
   AppManagerRepository appManagerRepository;
+
+  @Autowired
+  LoginRepository loginRepository;
 
   @Autowired
   ProductRepository productRepository;
@@ -104,6 +108,34 @@ public class userDao {
 
   public  void deleteSupplier(int id) {
     userRepository.deleteById(id);
+  }
+
+  //get the userLogin
+  public Buyer getBuyerFromLogin(UserLogin userLogin) {
+    List<Buyer> buyers = findAllBuy();
+    Buyer buyerCart;
+    for(Buyer buyer: buyers) {
+      if(buyer.getUserName().equals(userLogin.getUserName())){
+        return buyer;
+      }
+    }
+    return null;
+  }
+
+  public void saveLoginInfo(UserLogin login) {
+    loginRepository.save(login);
+  }
+
+  public UserLogin getLoginInfo() {
+    List<UserLogin> loginList =  (List<UserLogin>) loginRepository.findAll();
+    for(UserLogin userLogin: loginList) {
+      return  userLogin;
+    }
+    return  null;
+  }
+
+  public void deleteLoginInfo() {
+    loginRepository.deleteAll();
   }
 
 }

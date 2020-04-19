@@ -1,17 +1,26 @@
 package edu.northeastern.cs5200.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.sql.Date;
 import java.util.List;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import edu.northeastern.cs5200.modelHelpers.UserLogin;
+
 
 @Entity
 @Table(name="shopping_cart")
@@ -20,13 +29,17 @@ public class ShoppingCart {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @NotNull
+
   private Date created;
 
+
   //buyer of the shopping cart
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(unique = true)
   private Buyer buyerCart;
 
   @OneToMany(mappedBy = "shoppingCart")
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<Product> listOfProducts;
 
   public ShoppingCart(){
@@ -34,12 +47,18 @@ public class ShoppingCart {
 
   // set the buyer for this shopping cart and add the products to the shopping cart
   public void AddProductToShoppingCart(Product product) {
-    listOfProducts.add(product);
-    if(buyerCart.getShoppingCartOfBuyer() != this) {
-      buyerCart.setShoppingCartOfBuyer(this);
-    }
+    this.listOfProducts.add(product);
+    if (product.getShoppingCart() != this)
+      product.setShoppingCart(this);
   }
 
+  public Buyer getBuyerCart() {
+    return buyerCart;
+  }
+
+  public void setBuyerCart(Buyer buyerCart) {
+    this.buyerCart = buyerCart;
+  }
 
   public int getId() {
     return id;
@@ -58,7 +77,7 @@ public class ShoppingCart {
   }
 
   public List<Product> getListOfProducts() {
-    return listOfProducts;
+    return this.listOfProducts;
   }
 
   public void setListOfProducts(List<Product> listOfProducts) {

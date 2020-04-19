@@ -1,8 +1,20 @@
 package edu.northeastern.cs5200.modelHelpers;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+@Entity
+@Table(name = "login")
 public class UserLogin {
+
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
   @NotEmpty
   private String userName;

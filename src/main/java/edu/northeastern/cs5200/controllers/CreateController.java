@@ -8,19 +8,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.Date;
+
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import edu.northeastern.cs5200.daos.productDao;
+import edu.northeastern.cs5200.daos.shoppingCartDao;
 import edu.northeastern.cs5200.daos.userDao;
 import edu.northeastern.cs5200.models.AppManager;
 import edu.northeastern.cs5200.models.Buyer;
 import edu.northeastern.cs5200.models.Coupon;
 import edu.northeastern.cs5200.models.DeleteUser;
 import edu.northeastern.cs5200.models.Product;
+import edu.northeastern.cs5200.models.ShoppingCart;
 import edu.northeastern.cs5200.models.Supplier;
 import edu.northeastern.cs5200.modelHelpers.UserLogin;
 import edu.northeastern.cs5200.modelHelpers.UserRegistration;
@@ -47,12 +52,44 @@ public class CreateController {
   @Autowired
   private AppManagerRepository appManagerRepository;
 
+  @Autowired
+  private shoppingCartDao shoppingCartDao;
+
+
+
+
+
+  @RequestMapping("login/buyer/shoppingCart/{id}")
+  public String addProductToShoppingCart(@ModelAttribute("shoppingCartList") @Valid ShoppingCart shoppingCart
+                                         ,@PathVariable(name = "id") int id) {
+
+    //set the date of shopping cart
+    Date date1 = new Date();
+    java.sql.Date date = new java.sql.Date(date1.getTime());
+    shoppingCart.setCreated(date);
+    //shoppingCart.setListOfProducts(shoppingCart.getListOfProducts());
+    List<Product> products = productDao.listAll();
+    for(Product product: products) {
+      if(product.getId() == id) {
+        product.setCartForProduct(shoppingCart);
+      }
+    }
+    //shoppingCart.AddProductToShoppingCart(product);
+    return "redirect:/login/buyer";
+  }
 
   @RequestMapping("/login/buyer")
   public String buyerPage(Model model) {
-     List<Product> listProducts = productDao.listAll();
-     model.addAttribute("listProducts", listProducts);
-     return "buyer";
+    ShoppingCart shoppingCart = new ShoppingCart();
+    model.addAttribute("shoppingCartList", shoppingCart.getListOfProducts());
+    UserLogin login = userDao.getLoginInfo();
+    Buyer buyer = userDao.getBuyerFromLogin(login);
+    shoppingCart.setBuyerCart(buyer);
+
+    List<Product> listProducts = productDao.listAll();
+    model.addAttribute("listProducts", listProducts);
+
+    return "buyer";
   }
 
 
@@ -137,6 +174,7 @@ public class CreateController {
       for(Buyer buyer: buyerRepository.findAll()) {
         if(buyer.getUserName().equals(userLogin.getUserName()) &&
                 buyer.getPassword().equals(userLogin.getPassword())) {
+          userDao.saveLoginInfo(userLogin);
           return "redirect:/login/buyer";
         }
       }
@@ -145,6 +183,7 @@ public class CreateController {
       for(Supplier supplier: supplierRepository.findAll()) {
         if(supplier.getUserName().equals(userLogin.getUserName()) &&
                 supplier.getPassword().equals(userLogin.getPassword())) {
+          userDao.saveLoginInfo(userLogin);
           return "redirect:/supplier";
         }
       }
@@ -153,6 +192,7 @@ public class CreateController {
       for(AppManager appManager: appManagerRepository.findAll()) {
         if(appManager.getUsername().equals(userLogin.getUserName()) &&
                 appManager.getPassword().equals(userLogin.getPassword())) {
+          userDao.saveLoginInfo(userLogin);
           return "redirect:/login/manager";
         }
       }
