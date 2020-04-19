@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cs5200_spring2020_savaliya_jpa:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>cs5200_spring2020_savaliya_jpa</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="cs5200_spring2020_savaliya_jpa-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="cs5200_spring2020_savaliya_jpa:war exploded" />
+    </root>
+  </artifact>
+</component>
